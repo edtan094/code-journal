@@ -15,9 +15,41 @@
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-  <header>
+  <header class="purple-background">
+    <div class="container row">
+      <h4 class="white-text">Code Journal</h4>
+    </div>
   </header>
-  <main>
+  <main class="gray-background">
+    <div class="container" data-view="entry-form">
+      <div class="row">
+        <h2 class="column-full">New Entry</h2>
+      </div>
+      <div class="row">
+        <div class="column-half">
+          <div class="image-container">
+            <img class="image-size" src="images/placeholder-image-square.jpg">
+          </div>
+        </div>
+        <div class="column-half">
+          <form action="index.html" method="get" class="row flex-column">
+            <label for="Title" class="padding-bottom ">Title</label>
+            <input type="text" name="title" id="title" required>
+            <label for="Photo URL" class="padding-top padding-bottom">Photo URL</label>
+            <input type="text" name="Photo URL" id="Photo URL" required>
+          </form>
+        </div>
+      </div>
+      <div class="row column-full">
+        <form action="index.html" method="get" class="row flex-column">
+          <label for="Notes" class="padding-top padding-bottom">Notes</label>
+          <textarea name="Notes" cols="112" rows="7" id="Notes"></textarea>
+        </form>
+      </div>
+      <div class="row justify-end padding-top padding-bottom">
+        <button class="purple-background button ">SAVE</button>
+      </div>
+    </div>
   </main>
   <script src="js/data.js"></script>
   <script src="js/main.js"></script>
