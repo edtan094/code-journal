@@ -5,19 +5,60 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Code Journal</title>
   <link rel="icon" href="images/favicon.ico">
-  <link
-    rel="stylesheet"
-    crossorigin="anonymous"
+  <link rel="stylesheet" crossorigin="anonymous"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
     integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==">
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Proza+Libre&display=swap" rel="stylesheet">
 </head>
-<body>
-  <header>
+<body class="gray-background">
+  <header class="purple-background">
+    <div class="container">
+      <div class="row">
+        <div class="column-full">
+          <h4 class="white-text">Code Journal</h4>
+        </div>
+      </div>
+    </div>
   </header>
   <main>
+    <div class="container" data-view="entry-form">
+      <div class="row">
+        <div class="column-full">
+          <h2>New Entry</h2>
+        </div>
+      </div>
+      <form class="row" id="submission-form">
+        <div class="column-half">
+          <div class="image-container">
+            <img class="image-size image-place-holder" src="images/placeholder-image-square.jpg">
+          </div>
+        </div>
+        <div class="column-half">
+          <div class="row">
+            <label for="title" class="padding-bottom">Title</label>
+            <input type="text" name="title" id="title" class="title-value" required>
+          </div>
+          <div class="row">
+            <label for="Photo URL" class="padding-top padding-bottom">Photo URL</label>
+            <input type="text" name="Photo URL" id="photo-URL" required>
+          </div>
+        </div>
+        <div class="column-full padding-top">
+          <div class="row padding-bottom">
+            <label for="Notes">Notes</label>
+          </div>
+          <textarea name="Notes" rows="7" id="Notes" class="notes-value" required></textarea>
+        </div>
+        <div class="column-full padding-top padding-bottom">
+          <div class="row justify-end">
+            <button class="purple-background button new-entry-button">SAVE</button>
+          </div>
+        </div>
+      </form>
+    </div>
   </main>
   <script src="js/data.js"></script>
   <script src="js/main.js"></script>
