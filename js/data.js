@@ -7,16 +7,12 @@ var data = {
   nextEntryId: 1
 };
 var previousEntriesJSON = localStorage.getItem('entry');
-var previousNextEntryId = localStorage.getItem('entry ID');
-if (previousEntriesJSON !== null && previousNextEntryId !== 1) {
-  data.entries = JSON.parse(previousEntriesJSON);
-  data.nextEntryId = JSON.parse(previousNextEntryId);
+if (previousEntriesJSON !== null) {
+  data = JSON.parse(previousEntriesJSON);
 }
 
 window.addEventListener('beforeunload', function () {
-  var savedImagesJSON = JSON.stringify(data.entries);
-  var savedNextEntryId = JSON.stringify(data.nextEntryId);
+  var savedData = JSON.stringify(data);
 
-  localStorage.setItem('entry', savedImagesJSON);
-  this.localStorage.setItem('entry ID', savedNextEntryId);
+  localStorage.setItem('entry', savedData);
 });
