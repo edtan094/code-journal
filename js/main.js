@@ -22,5 +22,6 @@ function addingInputIntoObject(event) {
   inputs.notes = $notesValue;
   inputs.entryid = data.nextEntryId;
   data.nextEntryId++;
+  data.entries.unshift(inputs);
 }
 $newEntryButton.addEventListener('click', addingInputIntoObject);
