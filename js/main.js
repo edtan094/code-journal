@@ -20,6 +20,7 @@ function addingInputIntoObject(event) {
   inputs.title = $titleValue;
   inputs.photoURL = $photoURLValue;
   inputs.notes = $notesValue;
-  // console.log(inputs);
+  inputs.entryid = data.nextEntryId;
+  data.nextEntryId++;
 }
 $newEntryButton.addEventListener('click', addingInputIntoObject);
