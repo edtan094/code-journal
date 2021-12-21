@@ -13,16 +13,21 @@ $photoURL.addEventListener('input', photoURLInput);
 
 var $newEntryButton = document.querySelector('.new-entry-button');
 function addingInputIntoObject(event) {
-  var $titleValue = document.querySelector('.title-value').value;
-  var $photoURLValue = document.querySelector('#photo-URL').value;
-  var $notesValue = document.querySelector('.notes-value').value;
+  var $title = document.querySelector('.title-value');
+  var $photoURL = document.querySelector('#photo-URL');
+  var $notes = document.querySelector('.notes-value');
   var inputs = {};
-  inputs.title = $titleValue;
-  inputs.photoURL = $photoURLValue;
-  inputs.notes = $notesValue;
+  inputs.title = $title.value;
+  inputs.photoURL = $photoURL.value;
+  inputs.notes = $notes.value;
   inputs.entryid = data.nextEntryId;
   data.nextEntryId++;
   data.entries.unshift(inputs);
   $imagePlaceHolder.setAttribute('src', 'images/placeholder-image-square.jpg');
+
+  var $formTitleImage = document.querySelector('.form-title-image');
+  var $formNotes = document.querySelector('.form-notes');
+  $formTitleImage.reset();
+  $formNotes.reset();
 }
 $newEntryButton.addEventListener('click', addingInputIntoObject);
