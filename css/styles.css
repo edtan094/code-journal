@@ -24,6 +24,7 @@
 
 .image-container {
   width: 100%;
+  object-fit: contain;
 }
 
 .image-size {
@@ -45,5 +46,5 @@ button {
 }
 
 .padding-bottom {
-  padding-bottom: 20px;
+  padding-bottom: 5px;
 }
