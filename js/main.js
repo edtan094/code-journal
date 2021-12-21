@@ -1,7 +1,7 @@
 /* global data */
 /* exported data */
 
-var $imageContainer = document.querySelector('.image-container');
+// var $imageContainer = document.querySelector('.image-container');
 var $imagePlaceHolder = document.querySelector('.image-place-holder');
 var $photoURL = document.querySelector('#photo-URL');
 function photoURLInput(event) {
@@ -12,17 +12,14 @@ function photoURLInput(event) {
 $photoURL.addEventListener('input', photoURLInput);
 
 var $newEntryButton = document.querySelector('.new-entry-button');
-var $titleValue = document.querySelector('.title-value').value;
-var $photoURLValue = document.querySelector('#photo-URL').value;
-var $notesValue = document.querySelector('.notes-value').value;
 function addingInputIntoObject(event) {
-  var inputs {
-    title:
-    photoURL:
-    notes:
-  }
-  inputs.title = $titleValue
-  inputs.photoURL = $photoURLValue
-  inputs.notes = $notesValue
+  var $titleValue = document.querySelector('.title-value').value;
+  var $photoURLValue = document.querySelector('#photo-URL').value;
+  var $notesValue = document.querySelector('.notes-value').value;
+  var inputs = {};
+  inputs.title = $titleValue;
+  inputs.photoURL = $photoURLValue;
+  inputs.notes = $notesValue;
+  // console.log(inputs);
 }
-$newEntryButton.addEventListener('submit', addingInputIntoObject);
+$newEntryButton.addEventListener('click', addingInputIntoObject);
