@@ -13,22 +13,25 @@
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Proza+Libre&display=swap" rel="stylesheet">
 </head>
 <body>
   <header class="purple-background">
     <div class="container row">
-      <h4 class="white-text">Code Journal</h4>
+      <div class="column-full">
+        <h4 class="white-text">Code Journal</h4>
+      </div>
     </div>
   </header>
   <main class="gray-background">
     <div class="container" data-view="entry-form">
-      <div class="row">
-        <h2 class="column-full">New Entry</h2>
+      <div class="row column-full">
+        <h2>New Entry</h2>
       </div>
       <div class="row">
         <div class="column-half">
           <div class="image-container">
-            <img class="image-size" src="images/placeholder-image-square.jpg">
+            <img class="image-size image-place-holder" src="images/placeholder-image-square.jpg">
           </div>
         </div>
         <div class="column-half">
@@ -36,7 +39,7 @@
             <label for="Title" class="padding-bottom ">Title</label>
             <input type="text" name="title" id="title" required>
             <label for="Photo URL" class="padding-top padding-bottom">Photo URL</label>
-            <input type="text" name="Photo URL" id="Photo URL" required>
+            <input type="text" name="Photo URL" id="photo-URL" required>
           </form>
         </div>
       </div>
