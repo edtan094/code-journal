@@ -48,3 +48,18 @@ button {
 .padding-bottom {
   padding-bottom: 5px;
 }
+
+.align-center {
+  align-items: center;
+}
+
+.height-100 {
+  height: 100%;
+}
+
+ul,
+li {
+  margin-left: 0;
+  padding-left: 0;
+  list-style: none;
+}
