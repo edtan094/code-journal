@@ -23,5 +23,6 @@ function addingInputIntoObject(event) {
   inputs.entryid = data.nextEntryId;
   data.nextEntryId++;
   data.entries.unshift(inputs);
+  $imagePlaceHolder.setAttribute('src', 'images/placeholder-image-square.jpg');
 }
 $newEntryButton.addEventListener('click', addingInputIntoObject);
