@@ -71,3 +71,15 @@ li {
 .padding-left {
   padding-left: 15px;
 }
+
+.display-flex {
+  display: flex;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+a {
+  padding: 0 15px;
+}

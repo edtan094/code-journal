@@ -37,10 +37,10 @@ function swappingViews(event) {
       $allViews[eachView].className = 'hidden';
       if ($dataView === $allViews[eachView].getAttribute('data-view')) {
         $allViews[eachView].classList.replace('hidden', 'view');
+        data.view = event.target.getAttribute('data-view');
       }
     }
   }
-  addEntryNavigationItem();
 }
 $form.addEventListener('submit', swappingViews);
 
@@ -49,25 +49,19 @@ function anchor(event) {
   if (event.target.tagName === 'A') {
     var $dataView = event.target.getAttribute('data-view');
     for (var eachView = 0; eachView < $allViews.length; eachView++) {
-      $allViews[eachView].className = 'hidden';
+      $allViews[eachView].className = 'view hidden';
       if ($dataView === $allViews[eachView].getAttribute('data-view')) {
         $allViews[eachView].classList.replace('hidden', 'view');
+        data.view = event.target.getAttribute('data-view');
+      }
+      if ($allViews[eachView].matches('#navigation')) {
+        $allViews[eachView].classList.remove('hidden');
       }
     }
   }
 }
 $anchor.addEventListener('click', anchor);
 
-function addEntryNavigationItem(event) {
-  var $headerOfWebsite = document.querySelector('#header-of-website');
-
-  var $Entries = document.createElement('a');
-  var $EntriesText = document.createTextNode('Entries');
-  $Entries.setAttribute('class', 'white-text padding-left button');
-  $Entries.setAttribute('data-view', 'entries');
-  $Entries.appendChild($EntriesText);
-  $headerOfWebsite.appendChild($Entries);
-}
 function generateEntryDomTree(entries) {
   var $li = document.createElement('li');
 
@@ -114,7 +108,22 @@ function appendTheDom(event) {
 }
 document.addEventListener('DOMContentLoaded', appendTheDom);
 
-document.addEventListener('click', function showWhatIAmClicking(event) {
-  console.log(event.target);
-  console.log(event.target.tagName);
-});
+function previousDataView(event) {
+  var $view;
+  $view = data.view;
+  for (var eachView = 0; eachView < $allViews.length; eachView++) {
+    $allViews[eachView].className = 'hidden';
+    if ($view === $allViews[eachView].getAttribute('data-view')) {
+      $allViews[eachView].classList.replace('hidden', 'view');
+    }
+    if ($allViews[eachView].matches('#navigation')) {
+      $allViews[eachView].classList.remove('hidden');
+    }
+  }
+}
+previousDataView(Event);
+
+// document.addEventListener('click', function showWhatIAmClicking(event) {
+//   console.log(event.target);
+//   console.log(event.target.tagName);
+// });
