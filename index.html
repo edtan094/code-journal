@@ -18,60 +18,64 @@
     <div class="container">
       <div class="row">
         <div class="column-full">
-          <h4 class="white-text">Code Journal</h4>
+          <div class="row align-center" id="header-of-website">
+            <h4 class="white-text">Code Journal</h4>
+          </div>
         </div>
       </div>
     </div>
   </header>
   <main>
     <div class="container" data-view="entry-form">
-      <div class="row">
-        <div class="column-full">
-          <h2>New Entry</h2>
+      <div class="view">
+        <div class="row">
+          <div class="column-full">
+            <h2>New Entry</h2>
+          </div>
         </div>
+        <form class="row" id="submission-form">
+          <div class="column-half">
+            <div class="image-container">
+              <img class="image-size image-place-holder" src="images/placeholder-image-square.jpg">
+            </div>
+          </div>
+          <div class="column-half">
+            <div class="row">
+              <label for="title" class="padding-bottom">Title</label>
+              <input type="text" name="title" id="title" class="title-value" required>
+            </div>
+            <div class="row">
+              <label for="Photo URL" class="padding-top padding-bottom">Photo URL</label>
+              <input type="text" name="Photo URL" id="photo-URL" required>
+            </div>
+          </div>
+          <div class="column-full padding-top">
+            <div class="row padding-bottom">
+              <label for="Notes">Notes</label>
+            </div>
+            <textarea name="Notes" rows="7" id="Notes" class="notes-value" required></textarea>
+          </div>
+          <div class="column-full padding-top padding-bottom">
+            <div class="row justify-end">
+              <button class="purple-background button new-entry-button">SAVE</button>
+            </div>
+          </div>
+        </form>
       </div>
-      <form class="row" id="submission-form">
-        <div class="column-half">
-          <div class="image-container">
-            <img class="image-size image-place-holder" src="images/placeholder-image-square.jpg">
+      <div class="view hidden" data-view="entries">
+        <div class="row">
+          <div class="column-half">
+            <h2>Entries</h2>
+          </div>
+          <div class="column-half">
+            <div class="row justify-end align-center height-100">
+              <button class="purple-background button">NEW</button>
+            </div>
           </div>
         </div>
-        <div class="column-half">
-          <div class="row">
-            <label for="title" class="padding-bottom">Title</label>
-            <input type="text" name="title" id="title" class="title-value" required>
-          </div>
-          <div class="row">
-            <label for="Photo URL" class="padding-top padding-bottom">Photo URL</label>
-            <input type="text" name="Photo URL" id="photo-URL" required>
-          </div>
-        </div>
-        <div class="column-full padding-top">
-          <div class="row padding-bottom">
-            <label for="Notes">Notes</label>
-          </div>
-          <textarea name="Notes" rows="7" id="Notes" class="notes-value" required></textarea>
-        </div>
-        <div class="column-full padding-top padding-bottom">
-          <div class="row justify-end">
-            <button class="purple-background button new-entry-button">SAVE</button>
-          </div>
-        </div>
-      </form>
-    </div>
-    <div class="container" data-view="entries">
-      <div class="row">
-        <div class="column-half">
-          <h2>Entries</h2>
-        </div>
-        <div class="column-half">
-          <div class="row justify-end align-center height-100">
-            <button class="purple-background button">NEW</button>
-          </div>
-        </div>
+        <ul class="list">
+        </ul>
       </div>
-      <ul class="list">
-      </ul>
     </div>
   </main>
   <script src="js/data.js"></script>

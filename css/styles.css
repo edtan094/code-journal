@@ -67,3 +67,7 @@ li {
 .hidden {
   display: none;
 }
+
+.padding-left-right {
+  padding: 0 5px;
+}

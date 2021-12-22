@@ -27,8 +27,33 @@ function addingInputIntoObject(event) {
   var $ul = document.querySelector('ul');
   $ul.prepend($newLi);
 }
+
+var $viewElements = document.querySelectorAll('.view');
+function swappingViews(event) {
+  if (event.target.matches('#submission-form')) {
+    var $dataViewEntries = document.querySelector('.hidden').getAttribute('data-view');
+    for (var viewElementsPage = 0; viewElementsPage < $viewElements.length; viewElementsPage++) {
+      $viewElements[viewElementsPage].className = 'hidden';
+      if ($dataViewEntries === $viewElements[viewElementsPage].getAttribute('data-view')) {
+        $viewElements[viewElementsPage].classList.replace('hidden', 'view');
+      }
+    }
+  }
+  addEntryNavigationItem();
+}
+
+$form.addEventListener('submit', swappingViews);
 $form.addEventListener('submit', addingInputIntoObject);
 
+function addEntryNavigationItem(event) {
+  var $headerOfWebsite = document.querySelector('#header-of-website');
+
+  var $Entries = document.createElement('a');
+  var $EntriesText = document.createTextNode('Entries');
+  $Entries.setAttribute('class', 'white-text padding-left-right ');
+  $Entries.appendChild($EntriesText);
+  $headerOfWebsite.appendChild($Entries);
+}
 function generateEntryDomTree(entries) {
   var $li = document.createElement('li');
 
