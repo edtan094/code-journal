@@ -27,30 +27,44 @@ function addingInputIntoObject(event) {
   var $ul = document.querySelector('ul');
   $ul.prepend($newLi);
 }
+$form.addEventListener('submit', addingInputIntoObject);
 
-var $viewElements = document.querySelectorAll('.view');
+var $allViews = document.querySelectorAll('.view');
 function swappingViews(event) {
-  if (event.target.matches('#submission-form')) {
-    var $dataViewEntries = document.querySelector('.hidden').getAttribute('data-view');
-    for (var viewElementsPage = 0; viewElementsPage < $viewElements.length; viewElementsPage++) {
-      $viewElements[viewElementsPage].className = 'hidden';
-      if ($dataViewEntries === $viewElements[viewElementsPage].getAttribute('data-view')) {
-        $viewElements[viewElementsPage].classList.replace('hidden', 'view');
+  if (event.target.matches('.swap-view')) {
+    var $dataView = event.target.getAttribute('data-view');
+    for (var eachView = 0; eachView < $allViews.length; eachView++) {
+      $allViews[eachView].className = 'hidden';
+      if ($dataView === $allViews[eachView].getAttribute('data-view')) {
+        $allViews[eachView].classList.replace('hidden', 'view');
       }
     }
   }
   addEntryNavigationItem();
 }
-
 $form.addEventListener('submit', swappingViews);
-$form.addEventListener('submit', addingInputIntoObject);
+
+var $anchor = document.querySelector('.anchor');
+function anchor(event) {
+  if (event.target.tagName === 'A') {
+    var $dataView = event.target.getAttribute('data-view');
+    for (var eachView = 0; eachView < $allViews.length; eachView++) {
+      $allViews[eachView].className = 'hidden';
+      if ($dataView === $allViews[eachView].getAttribute('data-view')) {
+        $allViews[eachView].classList.replace('hidden', 'view');
+      }
+    }
+  }
+}
+$anchor.addEventListener('click', anchor);
 
 function addEntryNavigationItem(event) {
   var $headerOfWebsite = document.querySelector('#header-of-website');
 
   var $Entries = document.createElement('a');
   var $EntriesText = document.createTextNode('Entries');
-  $Entries.setAttribute('class', 'white-text padding-left-right ');
+  $Entries.setAttribute('class', 'white-text padding-left button');
+  $Entries.setAttribute('data-view', 'entries');
   $Entries.appendChild($EntriesText);
   $headerOfWebsite.appendChild($Entries);
 }
@@ -99,3 +113,8 @@ function appendTheDom(event) {
   }
 }
 document.addEventListener('DOMContentLoaded', appendTheDom);
+
+document.addEventListener('click', function showWhatIAmClicking(event) {
+  console.log(event.target);
+  console.log(event.target.tagName);
+});

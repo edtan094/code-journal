@@ -13,7 +13,7 @@
   <link rel="stylesheet" href="css/styles.css">
   <link href="https://fonts.googleapis.com/css2?family=Proza+Libre&display=swap" rel="stylesheet">
 </head>
-<body class="gray-background">
+<body class="gray-background anchor">
   <header class="purple-background">
     <div class="container">
       <div class="row">
@@ -26,14 +26,14 @@
     </div>
   </header>
   <main>
-    <div class="container" data-view="entry-form">
-      <div class="view">
+    <div class="container">
+      <div class="view" data-view="entry-form">
         <div class="row">
           <div class="column-full">
             <h2>New Entry</h2>
           </div>
         </div>
-        <form class="row" id="submission-form">
+        <form class="row swap-view" id="submission-form" data-view="entries">
           <div class="column-half">
             <div class="image-container">
               <img class="image-size image-place-holder" src="images/placeholder-image-square.jpg">
@@ -57,7 +57,7 @@
           </div>
           <div class="column-full padding-top padding-bottom">
             <div class="row justify-end">
-              <button class="purple-background button new-entry-button">SAVE</button>
+              <button class="purple-background button swap-view new-entry-button">SAVE</button>
             </div>
           </div>
         </form>
@@ -69,7 +69,7 @@
           </div>
           <div class="column-half">
             <div class="row justify-end align-center height-100">
-              <button class="purple-background button">NEW</button>
+              <a class="purple-background button" data-view="entry-form">NEW</a>
             </div>
           </div>
         </div>
