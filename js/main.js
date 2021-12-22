@@ -23,11 +23,13 @@ function addingInputIntoObject(event) {
   data.entries.unshift(inputs);
   $imagePlaceHolder.setAttribute('src', 'images/placeholder-image-square.jpg');
   $form.reset();
-  appendTheDom(data);
+  var $newLi = generateEntryDomTree(inputs);
+  var $ul = document.querySelector('ul');
+  $ul.prepend($newLi);
 }
 $form.addEventListener('submit', addingInputIntoObject);
 
-function addEntriesToPage(entries) {
+function generateEntryDomTree(entries) {
   var $li = document.createElement('li');
 
   var $divRow = document.createElement('div');
@@ -62,13 +64,13 @@ function addEntriesToPage(entries) {
   $divHalfColumn2.appendChild($paragraph);
 
   return $li;
-
 }
 
 function appendTheDom(event) {
   var $ul = document.querySelector('.list');
-  for (var i = 0; i < event.entries.length; i++) {
-    var $newEntry = addEntriesToPage(event.entries[i]);
+  for (var i = 0; i < data.entries.length; i++) {
+    var $newEntry = generateEntryDomTree(data.entries[i]);
     $ul.appendChild($newEntry);
   }
 }
+document.addEventListener('DOMContentLoaded', appendTheDom);
