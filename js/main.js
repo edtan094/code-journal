@@ -79,15 +79,27 @@ function generateEntryDomTree(entries) {
   $img.setAttribute('src', entries.photoURL);
   $divImageContainer.appendChild($img);
 
+  var $rowForEntryHeading = document.createElement('div');
+  $rowForEntryHeading.setAttribute('class', 'row justify-space-between align-center');
+  $divHalfColumn2.appendChild($rowForEntryHeading);
+
   var $heading = document.createElement('h3');
   var $headingText = document.createTextNode(entries.title);
   $heading.appendChild($headingText);
-  $divHalfColumn2.appendChild($heading);
+  $rowForEntryHeading.appendChild($heading);
+
+  var $editIcon = document.createElement('i');
+  $editIcon.setAttribute('class', 'fas fa-pen purple-pen pen-size');
+  $rowForEntryHeading.appendChild($editIcon);
+
+  var $rowForEntryParagraph = document.createElement('div');
+  $rowForEntryParagraph.setAttribute('class', 'row');
+  $divHalfColumn2.appendChild($rowForEntryParagraph);
 
   var $paragraph = document.createElement('p');
   var $paragraphText = document.createTextNode(entries.notes);
   $paragraph.appendChild($paragraphText);
-  $divHalfColumn2.appendChild($paragraph);
+  $rowForEntryParagraph.appendChild($paragraph);
 
   return $li;
 }
