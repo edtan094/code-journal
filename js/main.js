@@ -38,6 +38,9 @@ function removeNoEntriesText(event) {
 }
 
 var $allViews = document.querySelectorAll('.view');
+
+var $title = document.querySelector('#title');
+var $notes = document.querySelector('#notes');
 function swappingViews(event) {
   if (event.target.matches('.swap-view')) {
     var $dataView = event.target.getAttribute('data-view');
@@ -45,7 +48,19 @@ function swappingViews(event) {
   }
   if (event.target.matches('i')) {
     var $entry = event.target.closest('.list-entry');
-    $entry.getAttribute('data-entry-id');
+    var $entryIdValue = $entry.getAttribute('data-entry-id');
+    console.log('entryidValue:', $entryIdValue);
+
+    for (var dataEntriesIndex = 0; dataEntriesIndex < data.entries.length; dataEntriesIndex++) {
+      if ($entryIdValue - 1 === dataEntriesIndex) {
+        var entryObject = data.entries[dataEntriesIndex];
+        $title.value = entryObject.title;
+        $photoURL.value = entryObject.photoURL;
+        $imagePlaceHolder.removeAttribute('src');
+        $imagePlaceHolder.setAttribute('src', entryObject.photoURL);
+        $notes.value = entryObject.notes;
+      }
+    }
   }
 }
 $form.addEventListener('submit', swappingViews);
