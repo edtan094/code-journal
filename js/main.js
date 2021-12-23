@@ -29,27 +29,13 @@ function addingInputIntoObject(event) {
 }
 $form.addEventListener('submit', addingInputIntoObject);
 
-function viewTarget(dataView) {
-  for (var eachView = 0; eachView < $allViews.length; eachView++) {
-    $allViews[eachView].className = 'hidden';
-    if (dataView === $allViews[eachView].getAttribute('data-view')) {
-      $allViews[eachView].classList.replace('hidden', 'view');
-      data.view = event.target.getAttribute('data-view');
-    }
-    if ($allViews[eachView].matches('#navigation')) {
-      $allViews[eachView].classList.remove('hidden', 'hidden-navbar');
-    }
-  }
-}
-
 function removeNoEntriesText(event) {
   var $allLi = document.querySelectorAll('li');
   var $noEntriesText = document.querySelector('#no-entries-text');
-  if ($allLi.length === 1) {
-    $noEntriesText.remove();
+  if ($allLi.length > 0) {
+    $noEntriesText.className = 'hidden';
   }
 }
-$form.addEventListener('submit', removeNoEntriesText);
 
 var $allViews = document.querySelectorAll('.view');
 function swappingViews(event) {
@@ -112,20 +98,25 @@ function appendTheDom(event) {
     var $newEntry = generateEntryDomTree(data.entries[i]);
     $ul.appendChild($newEntry);
   }
+  removeNoEntriesText();
 }
 document.addEventListener('DOMContentLoaded', appendTheDom);
 
 function previousDataView(event) {
-  var $view;
-  $view = data.view;
-  for (var eachView = 0; eachView < $allViews.length; eachView++) {
-    $allViews[eachView].className = 'hidden';
-    if ($view === $allViews[eachView].getAttribute('data-view')) {
-      $allViews[eachView].classList.replace('hidden', 'view');
-    }
-    if ($allViews[eachView].matches('#navigation')) {
-      $allViews[eachView].classList.remove('hidden');
-    }
-  }
+  viewTarget(data.view);
 }
 previousDataView(event);
+
+function viewTarget(dataView) {
+  for (var eachView = 0; eachView < $allViews.length; eachView++) {
+    $allViews[eachView].className = 'hidden';
+    if (dataView === $allViews[eachView].getAttribute('data-view')) {
+      $allViews[eachView].classList.replace('hidden', 'view');
+      data.view = dataView;
+    }
+    if ($allViews[eachView].matches('#navigation')) {
+      $allViews[eachView].classList.remove('hidden', 'hidden-navbar');
+    }
+  }
+  removeNoEntriesText();
+}
