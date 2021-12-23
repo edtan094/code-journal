@@ -13,6 +13,5 @@ if (previousEntriesJSON !== null) {
 
 window.addEventListener('beforeunload', function () {
   var savedData = JSON.stringify(data);
-
   localStorage.setItem('entry', savedData);
 });
