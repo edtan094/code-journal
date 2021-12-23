@@ -24,6 +24,7 @@ function addingInputIntoObject(event) {
   $imagePlaceHolder.setAttribute('src', 'images/placeholder-image-square.jpg');
   $form.reset();
   var $newLi = generateEntryDomTree(inputs);
+  $newLi.setAttribute('data-entry-id', data.nextEntryId - 1);
   var $ul = document.querySelector('ul');
   $ul.prepend($newLi);
 }
@@ -127,7 +128,7 @@ function viewTarget(dataView) {
       data.view = dataView;
     }
     if ($allViews[eachView].matches('#navigation')) {
-      $allViews[eachView].classList.remove('hidden', 'hidden-navbar');
+      $allViews[eachView].classList.remove('hidden');
     }
   }
   removeNoEntriesText();
