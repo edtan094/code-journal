@@ -42,9 +42,10 @@ function addingInputIntoObject(event) {
   $newLi.setAttribute('data-entry-id', inputs.entryid);
   var $allLi = document.querySelectorAll('li');
   var $ul = document.querySelector('ul');
-  for (var $allLiIndex = 0; $allLiIndex < $allLi.length; $allLiIndex++) {
-    if ($newLi.getAttribute('data-entry-id') === $allLi[$allLiIndex].getAttribute('data-entry-id')) {
-      $ul.replaceChild($newLi, $allLi[$allLiIndex]);
+  for (var allLiIndex = 0; allLiIndex < $allLi.length; allLiIndex++) {
+    if ($newLi.getAttribute('data-entry-id') === $allLi[allLiIndex].getAttribute('data-entry-id')) {
+      $ul.replaceChild($newLi, $allLi[allLiIndex]);
+      return;
     }
   }
   $ul.prepend($newLi);
@@ -69,6 +70,8 @@ function swappingViews(event) {
     viewTarget($dataView);
   }
   if (event.target.matches('i')) {
+    var $heading = document.querySelector('h2');
+    $heading.textContent = 'Edit Entry';
     var $entry = event.target.closest('.list-entry');
     var $entryIdValue = $entry.getAttribute('data-entry-id');
     $entryIdValue = parseInt($entryIdValue);
@@ -93,6 +96,8 @@ $ul.addEventListener('click', swappingViews);
 var $anchor = document.querySelector('.anchor');
 function anchor(event) {
   if (event.target.tagName === 'A') {
+    var $heading = document.querySelector('h2');
+    $heading.textContent = 'New Entry';
     var $dataView = event.target.getAttribute('data-view');
     $imagePlaceHolder.setAttribute('src', 'images/placeholder-image-square.jpg');
     $form.reset();
@@ -181,8 +186,3 @@ function viewTarget(dataView) {
   }
   removeNoEntriesText();
 }
-
-// document.addEventListener('click', function showWhatIAmClicking(event) {
-//   console.log('event.target:', event.target);
-//   console.log('event.target.tagname:', event.target.tagName);
-// });
