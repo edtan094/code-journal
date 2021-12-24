@@ -14,17 +14,39 @@ function addingInputIntoObject(event) {
   var $title = document.querySelector('.title-value');
   var $photoURL = document.querySelector('#photo-URL');
   var $notes = document.querySelector('.notes-value');
+  var $imagePlaceHolder = document.querySelector('.image-place-holder');
   var inputs = {};
   inputs.title = $title.value;
   inputs.photoURL = $photoURL.value;
   inputs.notes = $notes.value;
-  inputs.entryid = data.nextEntryId;
-  data.nextEntryId++;
-  data.entries.unshift(inputs);
+  if ($imagePlaceHolder.matches('[data-entry-id]')) {
+    inputs.entryid = $imagePlaceHolder.getAttribute('data-entry-id');
+    inputs.entryid = parseInt(inputs.entryid);
+    for (var dataEntryNumber = 1; dataEntryNumber <= data.entries.length; dataEntryNumber++) {
+      if (inputs.entryid === data.entries[dataEntryNumber - 1].entryid) {
+        data.entries[dataEntryNumber - 1].title = inputs.title;
+        data.entries[dataEntryNumber - 1].photoURL = inputs.photoURL;
+        data.entries[dataEntryNumber - 1].notes = inputs.notes;
+      }
+    }
+  } else {
+    inputs.entryid = data.nextEntryId;
+    data.nextEntryId++;
+    data.entries.unshift(inputs);
+  }
   $imagePlaceHolder.setAttribute('src', 'images/placeholder-image-square.jpg');
   $form.reset();
+  $imagePlaceHolder.removeAttribute('data-entry-id');
   var $newLi = generateEntryDomTree(inputs);
+  $newLi.removeAttribute('data-entry-id');
+  $newLi.setAttribute('data-entry-id', inputs.entryid);
+  var $allLi = document.querySelectorAll('li');
   var $ul = document.querySelector('ul');
+  for (var $allLiIndex = 0; $allLiIndex < $allLi.length; $allLiIndex++) {
+    if ($newLi.getAttribute('data-entry-id') === $allLi[$allLiIndex].getAttribute('data-entry-id')) {
+      $ul.replaceChild($newLi, $allLi[$allLiIndex]);
+    }
+  }
   $ul.prepend($newLi);
 }
 $form.addEventListener('submit', addingInputIntoObject);
@@ -49,15 +71,15 @@ function swappingViews(event) {
   if (event.target.matches('i')) {
     var $entry = event.target.closest('.list-entry');
     var $entryIdValue = $entry.getAttribute('data-entry-id');
-    console.log('entryidValue:', $entryIdValue);
-
-    for (var dataEntriesIndex = 0; dataEntriesIndex < data.entries.length; dataEntriesIndex++) {
-      if ($entryIdValue - 1 === dataEntriesIndex) {
-        var entryObject = data.entries[dataEntriesIndex];
+    $entryIdValue = parseInt($entryIdValue);
+    for (var dataEntryNumber = 1; dataEntryNumber <= data.entries.length; dataEntryNumber++) {
+      if ($entryIdValue === data.entries[dataEntryNumber - 1].entryid) {
+        var entryObject = data.entries[dataEntryNumber - 1];
         $title.value = entryObject.title;
         $photoURL.value = entryObject.photoURL;
         $imagePlaceHolder.removeAttribute('src');
         $imagePlaceHolder.setAttribute('src', entryObject.photoURL);
+        $imagePlaceHolder.setAttribute('data-entry-id', $entryIdValue);
         $notes.value = entryObject.notes;
       }
     }
@@ -72,6 +94,8 @@ var $anchor = document.querySelector('.anchor');
 function anchor(event) {
   if (event.target.tagName === 'A') {
     var $dataView = event.target.getAttribute('data-view');
+    $imagePlaceHolder.setAttribute('src', 'images/placeholder-image-square.jpg');
+    $form.reset();
     viewTarget($dataView);
   }
 }
@@ -158,19 +182,7 @@ function viewTarget(dataView) {
   removeNoEntriesText();
 }
 
-// var $ul = document.querySelector('ul');
-// $ul.addEventListener('click', editEntries);
-// var $editTitle = document.querySelector('#title-value');
-// var $editPhotoURL = document.querySelector('#edit-photoURL');
-// var $editNotes = document.querySelector('#edit-notes');
-// function editEntries(event) {
-//   swappingViews();
-// for (var dataEntriesIndex = 0; dataEntriesIndex < data.entries.length; dataEntriesIndex++){
-//   if()
-// }
-// }
-
-document.addEventListener('click', function showWhatIAmClicking(event) {
-  console.log(event.target);
-  console.log(event.target.tagName);
-});
+// document.addEventListener('click', function showWhatIAmClicking(event) {
+//   console.log('event.target:', event.target);
+//   console.log('event.target.tagname:', event.target.tagName);
+// });
