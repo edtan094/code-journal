@@ -22,11 +22,11 @@ function addingInputIntoObject(event) {
   if ($imagePlaceHolder.matches('[data-entry-id]')) {
     inputs.entryid = $imagePlaceHolder.getAttribute('data-entry-id');
     inputs.entryid = parseInt(inputs.entryid);
-    for (var dataEntryNumber = 1; dataEntryNumber <= data.entries.length; dataEntryNumber++) {
-      if (inputs.entryid === data.entries[dataEntryNumber - 1].entryid) {
-        data.entries[dataEntryNumber - 1].title = inputs.title;
-        data.entries[dataEntryNumber - 1].photoURL = inputs.photoURL;
-        data.entries[dataEntryNumber - 1].notes = inputs.notes;
+    for (var dataEntryNumber = 0; dataEntryNumber < data.entries.length; dataEntryNumber++) {
+      if (inputs.entryid === data.entries[dataEntryNumber].entryid) {
+        data.entries[dataEntryNumber].title = inputs.title;
+        data.entries[dataEntryNumber].photoURL = inputs.photoURL;
+        data.entries[dataEntryNumber].notes = inputs.notes;
       }
     }
   } else {
@@ -75,9 +75,9 @@ function swappingViews(event) {
     var $entry = event.target.closest('.list-entry');
     var $entryIdValue = $entry.getAttribute('data-entry-id');
     $entryIdValue = parseInt($entryIdValue);
-    for (var dataEntryNumber = 1; dataEntryNumber <= data.entries.length; dataEntryNumber++) {
-      if ($entryIdValue === data.entries[dataEntryNumber - 1].entryid) {
-        var entryObject = data.entries[dataEntryNumber - 1];
+    for (var dataEntryNumber = 0; dataEntryNumber < data.entries.length; dataEntryNumber++) {
+      if ($entryIdValue === data.entries[dataEntryNumber].entryid) {
+        var entryObject = data.entries[dataEntryNumber];
         $title.value = entryObject.title;
         $photoURL.value = entryObject.photoURL;
         $imagePlaceHolder.removeAttribute('src');
@@ -108,7 +108,7 @@ $anchor.addEventListener('click', anchor);
 
 function generateEntryDomTree(entries) {
   var $li = document.createElement('li');
-  $li.setAttribute('data-entry-id', data.nextEntryId - 1);
+  $li.setAttribute('data-entry-id', data.nextEntryId);
   $li.setAttribute('class', 'list-entry');
 
   var $divRow = document.createElement('div');
