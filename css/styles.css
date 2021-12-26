@@ -10,6 +10,10 @@
   justify-content: end;
 }
 
+.justify-space-between {
+  justify-content: space-between;
+}
+
 .purple-background {
   background-color: rgb(86, 43, 129);
 }
@@ -84,14 +88,16 @@ a {
   padding: 0 15px;
 }
 
-.justify-space-between {
-  justify-content: space-between;
-}
-
 .purple-pen {
   color: rgb(86, 43, 129);
 }
 
 .pen-size {
   font-size: 30px;
+}
+
+.delete-button {
+  color: red;
+  text-decoration: underline;
+  border: none;
 }

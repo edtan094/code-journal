@@ -70,6 +70,7 @@ function swappingViews(event) {
     viewTarget($dataView);
   }
   if (event.target.matches('i')) {
+    addingDeleteEntryButton();
     var $heading = document.querySelector('h2');
     $heading.textContent = 'Edit Entry';
     var $entry = event.target.closest('.list-entry');
@@ -92,6 +93,15 @@ $form.addEventListener('submit', swappingViews);
 
 var $ul = document.querySelector('ul');
 $ul.addEventListener('click', swappingViews);
+
+function addingDeleteEntryButton(event) {
+  var $divButtons = document.querySelector('#buttons');
+  $divButtons.classList.replace('justify-end', 'justify-space-between');
+  var $deleteButton = document.createElement('button');
+  $deleteButton.setAttribute('class', 'delete-button');
+  $deleteButton.textContent = 'Delete Entry';
+  $divButtons.prepend($deleteButton);
+}
 
 var $anchor = document.querySelector('.anchor');
 function anchor(event) {
