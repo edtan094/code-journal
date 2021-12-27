@@ -16,6 +16,7 @@
 </head>
 
 <body class="gray-background anchor">
+  <div class="background-dark position-fixed hidden" id="overlay"></div>
   <header class="purple-background">
     <div class="container">
       <div class="row">
@@ -37,6 +38,13 @@
           </div>
         </div>
         <form class="row swap-view" id="submission-form" data-view="entries">
+          <div class="center-of-page white-box hidden" id="modal">
+            <p>Are you sure you want to delete this entry</p>
+            <div class="row justify-space-between">
+              <button class="cancel-button" type="button">CANCEL</button>
+              <button class="confirm-button" type="button">CONFIRM</button>
+            </div>
+          </div>
           <div class="column-half">
             <div class="image-container">
               <img class="image-size image-place-holder" src="images/placeholder-image-square.jpg">
@@ -59,8 +67,8 @@
             <textarea name="Notes" rows="7" id="notes" class="notes-value" required></textarea>
           </div>
           <div class="column-full padding-top padding-bottom">
-            <div class="row justify-space-between" id="buttons">
-              <button class="hidden delete-button">Delete Entry</button>
+            <div class="row justify-end" id="buttons">
+              <button class="hidden delete-button" type="button">Delete Entry</button>
               <button class="purple-background button">SAVE</button>
             </div>
           </div>
