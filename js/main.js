@@ -10,6 +10,7 @@ $photoURL.addEventListener('input', photoURLInput);
 
 var $form = document.querySelector('#submission-form');
 function addingInputIntoObject(event) {
+  console.log('addingInput');
   event.preventDefault();
   var $title = document.querySelector('.title-value');
   var $photoURL = document.querySelector('#photo-URL');
@@ -70,7 +71,8 @@ function swappingViews(event) {
     viewTarget($dataView);
   }
   if (event.target.matches('i')) {
-    addingDeleteEntryButton();
+    var $deleteButton = document.querySelector('.delete-button');
+    $deleteButton.classList.remove('hidden');
     var $heading = document.querySelector('h2');
     $heading.textContent = 'Edit Entry';
     var $entry = event.target.closest('.list-entry');
@@ -94,14 +96,47 @@ $form.addEventListener('submit', swappingViews);
 var $ul = document.querySelector('ul');
 $ul.addEventListener('click', swappingViews);
 
-function addingDeleteEntryButton(event) {
-  var $divButtons = document.querySelector('#buttons');
-  $divButtons.classList.replace('justify-end', 'justify-space-between');
-  var $deleteButton = document.createElement('button');
-  $deleteButton.setAttribute('class', 'delete-button');
-  $deleteButton.textContent = 'Delete Entry';
-  $divButtons.prepend($deleteButton);
+function deleteModal(event) {
+  console.log('modal');
+  var $body = document.querySelector('body');
+
+  var $divModalBackground = document.createElement('div');
+  $divModalBackground.setAttribute('class', 'background-dark');
+  $divModalBackground.setAttribute('class', 'position-fixed');
+  $body.appendChild($divModalBackground);
+
+  var $divForm = document.querySelector('#submission-form');
+
+  var $modalDiv = document.createElement('div');
+  $modalDiv.setAttribute('class', 'center-of-page');
+  $modalDiv.setAttribute('id', 'modal');
+  $modalDiv.setAttribute('class', 'white-box');
+
+  var $deleteModalText = document.createElement('p');
+  $deleteModalText.textContent = 'Are you sure you want to delete this entry';
+
+  var $divButtons = document.createElement('div');
+  $divButtons.setAttribute('class', 'row');
+  $divButtons.setAttribute('class', 'justify-space-between');
+
+  var $cancelButton = document.createElement('button');
+  $cancelButton.textContent = 'CANCEL';
+  $cancelButton.setAttribute('class', 'cancel-button');
+
+  var $confirmButton = document.createElement('button');
+  $confirmButton.textContent = 'CONFIRM';
+  $confirmButton.setAttribute('class', 'confirm-button');
+
+  $divButtons.appendChild($cancelButton);
+  $divButtons.appendChild($confirmButton);
+  $modalDiv.appendChild($deleteModalText);
+  $modalDiv.appendChild($divButtons);
+  $divForm.appendChild($modalDiv);
+  $body.appendChild($divModalBackground);
+
 }
+var $deleteButton = document.querySelector('.delete-button');
+$deleteButton.addEventListener('click', deleteModal);
 
 var $anchor = document.querySelector('.anchor');
 function anchor(event) {
@@ -111,6 +146,10 @@ function anchor(event) {
     var $dataView = event.target.getAttribute('data-view');
     $imagePlaceHolder.setAttribute('src', 'images/placeholder-image-square.jpg');
     $form.reset();
+    // var $deleteButton = document.querySelector('.delete-button');
+    // if ($deleteButton !== null) {
+    //   $deleteButton.remove();
+    // }
     viewTarget($dataView);
   }
 }
