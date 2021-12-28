@@ -10,7 +10,6 @@ $photoURL.addEventListener('input', photoURLInput);
 
 var $form = document.querySelector('#submission-form');
 function addingInputIntoObject(event) {
-  console.log('addingInput');
   event.preventDefault();
   var $title = document.querySelector('.title-value');
   var $photoURL = document.querySelector('#photo-URL');
@@ -99,7 +98,6 @@ var $ul = document.querySelector('ul');
 $ul.addEventListener('click', swappingViews);
 
 function deleteModal(event) {
-  console.log('modal');
   var $overLay = document.querySelector('#overlay');
   $overLay.classList.remove('hidden');
 
@@ -109,6 +107,23 @@ function deleteModal(event) {
 }
 var $deleteButton = document.querySelector('.delete-button');
 $deleteButton.addEventListener('click', deleteModal);
+
+function modalFunction(event) {
+  if (event.target.matches('.cancel-button')) {
+    console.log('cancel!');
+    var $overLay = document.querySelector('#overlay');
+    $overLay.classList.add('hidden');
+
+    var $modal = document.querySelector('#modal');
+    $modal.classList.add('hidden');
+  }
+  if (event.target.matches('.confirm-button')) {
+    console.log('confirm!');
+  }
+}
+
+var $modalButtons = document.querySelector('#modal-buttons');
+$modalButtons.addEventListener('click', modalFunction);
 
 var $anchor = document.querySelector('.anchor');
 function anchor(event) {
