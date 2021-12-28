@@ -109,17 +109,29 @@ var $deleteButton = document.querySelector('.delete-button');
 $deleteButton.addEventListener('click', deleteModal);
 
 function modalFunction(event) {
-  if (event.target.matches('.cancel-button')) {
-    console.log('cancel!');
-    var $overLay = document.querySelector('#overlay');
-    $overLay.classList.add('hidden');
-
-    var $modal = document.querySelector('#modal');
-    $modal.classList.add('hidden');
-  }
   if (event.target.matches('.confirm-button')) {
-    console.log('confirm!');
+    var $allLi = document.querySelectorAll('.list-entry');
+    for (var allLiIndex = 0; allLiIndex < $allLi.length; allLiIndex++) {
+      var deleteLi = document.querySelector('img');
+      var deleteLiDataEntryNumber = deleteLi.getAttribute('data-entry-id');
+      var liEntryonEntriesPage = $allLi[allLiIndex];
+      if (deleteLiDataEntryNumber === liEntryonEntriesPage.getAttribute('data-entry-id')) {
+        $allLi[allLiIndex].remove();
+        var $dataView = event.target.getAttribute('data-view');
+        viewTarget($dataView);
+        for (var dataEntriesIndex = 0; dataEntriesIndex < data.entries.length; dataEntriesIndex++) {
+          if (parseInt(liEntryonEntriesPage.getAttribute('data-entry-id')) === data.entries[dataEntriesIndex].entryid) {
+            data.entries.splice(dataEntriesIndex, 1);
+          }
+        }
+      }
+    }
   }
+  var $overLay = document.querySelector('#overlay');
+  $overLay.classList.add('hidden');
+
+  var $modal = document.querySelector('#modal');
+  $modal.classList.add('hidden');
 }
 
 var $modalButtons = document.querySelector('#modal-buttons');
@@ -144,7 +156,7 @@ $anchor.addEventListener('click', anchor);
 
 function generateEntryDomTree(entries) {
   var $li = document.createElement('li');
-  $li.setAttribute('data-entry-id', data.nextEntryId);
+  $li.setAttribute('data-entry-id', entries.entryid);
   $li.setAttribute('class', 'list-entry');
 
   var $divRow = document.createElement('div');
