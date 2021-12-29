@@ -10,6 +10,10 @@
   justify-content: end;
 }
 
+.justify-space-between {
+  justify-content: space-between;
+}
+
 .purple-background {
   background-color: rgb(86, 43, 129);
 }
@@ -68,6 +72,10 @@ li {
   display: none;
 }
 
+.hidden-delete-button {
+  display: none;
+}
+
 .padding-left {
   padding-left: 15px;
 }
@@ -84,14 +92,60 @@ a {
   padding: 0 15px;
 }
 
-.justify-space-between {
-  justify-content: space-between;
-}
-
 .purple-pen {
   color: rgb(86, 43, 129);
 }
 
 .pen-size {
   font-size: 30px;
+}
+
+.delete-button {
+  color: red;
+  text-decoration: underline;
+  border: none;
+}
+
+.background-dark {
+  background-color: rgba(20, 20, 20, 0.89);
+  width: 100vw;
+  height: 100vh;
+}
+
+.center-of-page {
+  flex-direction: column;
+  align-items: center;
+}
+
+.white-box {
+  height: 200px;
+  width: 400px;
+  background-color: white;
+  border-radius: 5px;
+  margin-top: 200px;
+}
+
+.position-fixed {
+  position: fixed;
+}
+
+.cancel-button {
+  background-color: gray;
+  border: none;
+  border-radius: 3px;
+  height: 30px;
+  width: 90px;
+}
+
+.confirm-button {
+  color: white;
+  background-color: red;
+  border: none;
+  border-radius: 3px;
+  height: 30px;
+  width: 110px;
+}
+
+.button-content-height {
+  height: 50%;
 }

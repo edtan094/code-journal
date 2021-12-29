@@ -19,8 +19,8 @@ function addingInputIntoObject(event) {
   inputs.title = $title.value;
   inputs.photoURL = $photoURL.value;
   inputs.notes = $notes.value;
-  if ($imagePlaceHolder.matches('[data-entry-id]')) {
-    inputs.entryid = $imagePlaceHolder.getAttribute('data-entry-id');
+  if (data.editing !== null) {
+    inputs.entryid = data.editing;
     inputs.entryid = parseInt(inputs.entryid);
     for (var dataEntryNumber = 0; dataEntryNumber < data.entries.length; dataEntryNumber++) {
       if (inputs.entryid === data.entries[dataEntryNumber].entryid) {
@@ -45,10 +45,12 @@ function addingInputIntoObject(event) {
   for (var allLiIndex = 0; allLiIndex < $allLi.length; allLiIndex++) {
     if ($newLi.getAttribute('data-entry-id') === $allLi[allLiIndex].getAttribute('data-entry-id')) {
       $ul.replaceChild($newLi, $allLi[allLiIndex]);
+      data.editing = null;
       return;
     }
   }
   $ul.prepend($newLi);
+  data.editing = null;
 }
 $form.addEventListener('submit', addingInputIntoObject);
 
@@ -70,6 +72,10 @@ function swappingViews(event) {
     viewTarget($dataView);
   }
   if (event.target.matches('i')) {
+    var $deleteButton = document.querySelector('.delete-button');
+    $deleteButton.classList.remove('hidden');
+    var $divButtons = document.querySelector('#buttons');
+    $divButtons.classList.replace('justify-end', 'justify-space-between');
     var $heading = document.querySelector('h2');
     $heading.textContent = 'Edit Entry';
     var $entry = event.target.closest('.list-entry');
@@ -82,7 +88,7 @@ function swappingViews(event) {
         $photoURL.value = entryObject.photoURL;
         $imagePlaceHolder.removeAttribute('src');
         $imagePlaceHolder.setAttribute('src', entryObject.photoURL);
-        $imagePlaceHolder.setAttribute('data-entry-id', $entryIdValue);
+        data.editing = $entryIdValue;
         $notes.value = entryObject.notes;
       }
     }
@@ -93,6 +99,46 @@ $form.addEventListener('submit', swappingViews);
 var $ul = document.querySelector('ul');
 $ul.addEventListener('click', swappingViews);
 
+function deleteModal(event) {
+  var $overLay = document.querySelector('#overlay');
+  $overLay.classList.remove('hidden');
+
+  var $modal = document.querySelector('#modal');
+  $modal.classList.remove('hidden');
+
+}
+var $deleteButton = document.querySelector('.delete-button');
+$deleteButton.addEventListener('click', deleteModal);
+
+function modalFunction(event) {
+  if (event.target.matches('.confirm-button')) {
+    var $allLi = document.querySelectorAll('.list-entry');
+    for (var allLiIndex = 0; allLiIndex < $allLi.length; allLiIndex++) {
+      var deleteLiDataEntryNumber = data.editing;
+      var liEntryonEntriesPage = $allLi[allLiIndex];
+      if (deleteLiDataEntryNumber === parseInt(liEntryonEntriesPage.getAttribute('data-entry-id'))) {
+        $allLi[allLiIndex].remove();
+        var $dataView = event.target.getAttribute('data-view');
+        viewTarget($dataView);
+        for (var dataEntriesIndex = 0; dataEntriesIndex < data.entries.length; dataEntriesIndex++) {
+          if (parseInt(liEntryonEntriesPage.getAttribute('data-entry-id')) === data.entries[dataEntriesIndex].entryid) {
+            data.entries.splice(dataEntriesIndex, 1);
+            data.editing = null;
+          }
+        }
+      }
+    }
+  }
+  var $overLay = document.querySelector('#overlay');
+  $overLay.classList.add('hidden');
+
+  var $modal = document.querySelector('#modal');
+  $modal.classList.add('hidden');
+}
+
+var $modalButtons = document.querySelector('#modal-buttons');
+$modalButtons.addEventListener('click', modalFunction);
+
 var $anchor = document.querySelector('.anchor');
 function anchor(event) {
   if (event.target.tagName === 'A') {
@@ -101,6 +147,10 @@ function anchor(event) {
     var $dataView = event.target.getAttribute('data-view');
     $imagePlaceHolder.setAttribute('src', 'images/placeholder-image-square.jpg');
     $form.reset();
+    var $deleteButton = document.querySelector('.delete-button');
+    $deleteButton.classList.add('hidden');
+    var $divButtons = document.querySelector('#buttons');
+    $divButtons.classList.replace('justify-space-between', 'justify-end');
     viewTarget($dataView);
   }
 }
@@ -108,7 +158,7 @@ $anchor.addEventListener('click', anchor);
 
 function generateEntryDomTree(entries) {
   var $li = document.createElement('li');
-  $li.setAttribute('data-entry-id', data.nextEntryId);
+  $li.setAttribute('data-entry-id', entries.entryid);
   $li.setAttribute('class', 'list-entry');
 
   var $divRow = document.createElement('div');
