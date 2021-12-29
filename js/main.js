@@ -19,8 +19,8 @@ function addingInputIntoObject(event) {
   inputs.title = $title.value;
   inputs.photoURL = $photoURL.value;
   inputs.notes = $notes.value;
-  if ($imagePlaceHolder.matches('[data-entry-id]')) {
-    inputs.entryid = $imagePlaceHolder.getAttribute('data-entry-id');
+  if (data.editing !== null) {
+    inputs.entryid = data.editing;
     inputs.entryid = parseInt(inputs.entryid);
     for (var dataEntryNumber = 0; dataEntryNumber < data.entries.length; dataEntryNumber++) {
       if (inputs.entryid === data.entries[dataEntryNumber].entryid) {
@@ -45,10 +45,12 @@ function addingInputIntoObject(event) {
   for (var allLiIndex = 0; allLiIndex < $allLi.length; allLiIndex++) {
     if ($newLi.getAttribute('data-entry-id') === $allLi[allLiIndex].getAttribute('data-entry-id')) {
       $ul.replaceChild($newLi, $allLi[allLiIndex]);
+      data.editing = null;
       return;
     }
   }
   $ul.prepend($newLi);
+  data.editing = null;
 }
 $form.addEventListener('submit', addingInputIntoObject);
 
@@ -86,7 +88,7 @@ function swappingViews(event) {
         $photoURL.value = entryObject.photoURL;
         $imagePlaceHolder.removeAttribute('src');
         $imagePlaceHolder.setAttribute('src', entryObject.photoURL);
-        $imagePlaceHolder.setAttribute('data-entry-id', $entryIdValue);
+        data.editing = $entryIdValue;
         $notes.value = entryObject.notes;
       }
     }
@@ -112,16 +114,16 @@ function modalFunction(event) {
   if (event.target.matches('.confirm-button')) {
     var $allLi = document.querySelectorAll('.list-entry');
     for (var allLiIndex = 0; allLiIndex < $allLi.length; allLiIndex++) {
-      var deleteLi = document.querySelector('img');
-      var deleteLiDataEntryNumber = deleteLi.getAttribute('data-entry-id');
+      var deleteLiDataEntryNumber = data.editing;
       var liEntryonEntriesPage = $allLi[allLiIndex];
-      if (deleteLiDataEntryNumber === liEntryonEntriesPage.getAttribute('data-entry-id')) {
+      if (deleteLiDataEntryNumber === parseInt(liEntryonEntriesPage.getAttribute('data-entry-id'))) {
         $allLi[allLiIndex].remove();
         var $dataView = event.target.getAttribute('data-view');
         viewTarget($dataView);
         for (var dataEntriesIndex = 0; dataEntriesIndex < data.entries.length; dataEntriesIndex++) {
           if (parseInt(liEntryonEntriesPage.getAttribute('data-entry-id')) === data.entries[dataEntriesIndex].entryid) {
             data.entries.splice(dataEntriesIndex, 1);
+            data.editing = null;
           }
         }
       }
